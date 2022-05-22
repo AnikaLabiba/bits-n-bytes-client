@@ -8,13 +8,15 @@ import { signOut } from 'firebase/auth';
 
 const Header = () => {
     const [user] = useAuthState(auth)
+    if (user) {
+        console.log(user);
+    }
     const menuItems = <>
         <li><Link to='/home'>Home</Link></li>
         <li><Link to='/appointment'>Appointment</Link></li>
         <li><Link to='/blogs'>Blogs</Link></li>
         <li><Link to='/portfolio'>My Portfolio</Link></li>
         <li><Link to='/about'>About</Link></li>
-        <li><Link to='/login'>Login</Link></li>
     </>
     const logout = () => {
         signOut(auth);
@@ -40,16 +42,22 @@ const Header = () => {
             </div>
             <div class="navbar-end">
                 {
-                    user && <div class="dropdown dropdown-end">
-                        <label tabindex="0" class="btn btn-ghost">
-                            <p className='text-2xl text-center'><BiUserCircle /></p>
-                            <p>{user?.displayName}</p>
+                    user ? <>
+                        <div class="dropdown dropdown-end">
+                            <label tabindex="0" class="btn btn-ghost">
+                                <p className='text-2xl text-center'><BiUserCircle /></p>
+                                <p>{user?.displayName}</p>
 
-                        </label>
-                        <ul tabindex="0" class="p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                            <li><button onClick={logout} class="btn btn-xs btn-ghost pb-2">Logout<IoMdLogOut /></button></li>
+                            </label>
+                            <ul tabindex="0" class="p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                                <li><button onClick={logout} class="btn btn-xs btn-ghost pb-2">Logout<IoMdLogOut /></button></li>
+                            </ul>
+                        </div>
+                    </>
+                        : <ul class="menu menu-horizontal p-0">
+                            <li><Link to='/login'>Login</Link></li>
                         </ul>
-                    </div>
+
                 }
                 {/* <ul class="menu menu-horizontal p-0">
                     {

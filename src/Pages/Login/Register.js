@@ -16,6 +16,7 @@ const Register = () => {
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     if (googleLoading || updating || loading) {
@@ -36,9 +37,8 @@ const Register = () => {
     }
 
     const onSubmit = async data => {
-        console.log(data);
-        createUserWithEmailAndPassword(data.email, data.password)
-        updateProfile({ displayName: data.name })
+        await createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({ displayName: data.name });
     }
     return (
         <div className='flex h-screen justify-center items-center'>
