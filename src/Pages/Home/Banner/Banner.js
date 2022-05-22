@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Banner.css'
-import bg from '../../../images/bg (1).png'
 
 const Banner = () => {
     return (
@@ -9,8 +9,8 @@ const Banner = () => {
             <div class="hero-content text-center text-neutral-content">
                 <div class="max-w-md">
                     <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-                    <p class="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    <button class="btn btn-primary">Get Started</button>
+                    <p class="mb-5 text-xl">We are here to serve you the authentic parts in best deal. We believe in your satisfaction. </p>
+                    <Link to='/login'><button class="btn btn-primary">Get Started</button></Link>
                 </div>
             </div>
         </div>
