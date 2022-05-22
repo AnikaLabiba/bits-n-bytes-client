@@ -1,10 +1,51 @@
 import React from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../../../firebase.init';
+import Loading from '../../Shared/Loading';
 
 const Login = () => {
+    const navigate = useNavigate()
+
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
+
+    // const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+
+    if (user) {
+        navigate(from, { replace: true });
+    }
+
+    // const [token] = useToken(user || gUser)
+
+    // useEffect(() => {
+    //     if (token) {
+    //         navigate(from, { replace: true });
+    //     }
+    // }, [token, from, navigate])
+
+
+    if (loading) {
+        return <Loading></Loading>
+    }
+
+    let errorElememt;
+    if (error) {
+        errorElememt = <p className='text-red-500 text-sm'>{error?.message}</p>
+    }
     const onSubmit = data => {
+        console.log(data);
+        signInWithEmailAndPassword(data.email, data.password)
+
     }
     return (
         <div className='flex h-screen justify-center items-center'>
@@ -60,7 +101,7 @@ const Login = () => {
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                             </label>
                         </div>
-
+                        {errorElememt}
                         <input className='btn w-full max-w-xs' type="submit" value='Login' />
                     </form>
                     <p><small>New to Bit n Bytes? <Link className='text-blue-400' to="/register">Create New Account</Link></small></p>

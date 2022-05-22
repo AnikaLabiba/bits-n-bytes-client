@@ -10,6 +10,7 @@ import MyPortfolio from './Pages/MyPortfolio/MyPortfolio'
 import Login from './Pages/Login/Login/Login';
 import Purchase from './Pages/Purchase/Purchase';
 import Register from './Pages/Login/Register';
+import RequireAuth from './Pages/Login/RequireAuth';
 
 function App() {
   return (
@@ -22,7 +23,9 @@ function App() {
         <Route path='/portfolio' element={<MyPortfolio />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
-        <Route path='/purchase/:id' element={<Purchase />}></Route>
+        <Route path='/purchase/:id' element={<RequireAuth>
+          <Purchase />
+        </RequireAuth>}></Route>
       </Routes>
       <Footer></Footer>
       <ToastContainer />
