@@ -53,7 +53,48 @@ const Purchase = () => {
             address: event.target.address.value,
             phone: event.target.phone.value,
         }
-        console.log(order);
+
+        fetch('http://localhost:5000/part', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('success', data)
+                toast.info('Your order is Placed.', {
+                    position: toast.POSITION.TOP_CENTER
+                })
+                event.target.reset()
+
+                const oldQuantity = parseInt(part.availableQuantity)
+                const updatedQuantity = oldQuantity - orderQuantity
+                const updatedPart = { ...part, availableQuantity: updatedQuantity }
+                console.log(updatedPart)
+
+                // const url = `https://mysterious-retreat-05451.herokuapp.com/inventory/${id}`
+                // fetch(url, {
+                //     method: 'put',
+                //     headers: {
+                //         'content-type': 'application/json'
+                //     },
+                //     body: JSON.stringify(updatedCar)
+                // })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         if (data.modifiedCount > 0) {
+                //             console.log('success', data)
+                //             setCar(updatedCar)
+                //             toast.info('Quantity is added.', {
+                //                 position: toast.POSITION.TOP_CENTER
+                //             })
+                //             event.target.reset()
+                //         }
+                //     })
+
+            })
     }
     return (
         <div className='my-10'>

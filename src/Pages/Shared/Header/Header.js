@@ -8,9 +8,7 @@ import { signOut } from 'firebase/auth';
 
 const Header = () => {
     const [user] = useAuthState(auth)
-    if (user) {
-        console.log(user);
-    }
+
     const menuItems = <>
         <li><Link to='/home'>Home</Link></li>
         <li><Link to='/appointment'>Appointment</Link></li>
