@@ -6,7 +6,6 @@ const Part = ({ part }) => {
     const navigate = useNavigate()
     const handleNavigate = id => {
         navigate(`/purchase/${id}`)
-        console.log(id);
     }
     return (
         <div class="card bg-base-100 shadow-xl max-h-fit">

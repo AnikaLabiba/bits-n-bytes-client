@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import useParts from '../../../hooks/useParts';
 import Part from './Part';
 
 const Parts = () => {
-    const [parts, setParts] = useState([])
+    const [parts] = useParts([])
 
-    useEffect(() => {
-        fetch('http://localhost:5000/parts')
-            .then(res => res.json())
-            .then(data => setParts(data.reverse()))
-    }, [])
+
     return (
         <div className='mx-12 my-20'>
             <h2 className='text-4xl text-center font-bold'>Our Featured Products</h2>

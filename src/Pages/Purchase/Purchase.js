@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useForm } from 'react-hook-form';
-import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import useParts from '../../hooks/useParts';
 
 const Purchase = () => {
     const [user] = useAuthState(auth)
     const { id } = useParams()
     const [orderQuantity, setOrderQuantity] = useState(0)
-    const [part, setParts] = useState({})
+    const [part, setPart] = useState({})
+    const [setParts] = useParts()
 
     useEffect(() => {
         const url = `http://localhost:5000/part/${id}`
         fetch(url)
             .then(res => res.json())
-            .then(data => setParts(data))
+            .then(data => setPart(data))
     }, [id])
 
     // const { data: part, isLoading, refetch } = useQuery(['part', id], () => {
@@ -49,12 +49,13 @@ const Purchase = () => {
             email: user?.email,
             parrtId: id,
             part: part.name,
+            price: part.price,
             quantity: quantity,
             address: event.target.address.value,
             phone: event.target.phone.value,
         }
 
-        fetch('http://localhost:5000/part', {
+        fetch('http://localhost:5000/order', {
             method: 'post',
             headers: {
                 'content-type': 'application/json'
@@ -63,36 +64,33 @@ const Purchase = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('success', data)
-                toast.info('Your order is Placed.', {
-                    position: toast.POSITION.TOP_CENTER
-                })
-                event.target.reset()
+                if (data.acknowledged) {
+                    console.log('success', data)
+                    toast.info('Your order is Placed.', {
+                        position: toast.POSITION.TOP_CENTER
+                    })
+                    event.target.reset()
 
-                const oldQuantity = parseInt(part.availableQuantity)
-                const updatedQuantity = oldQuantity - orderQuantity
-                const updatedPart = { ...part, availableQuantity: updatedQuantity }
-                console.log(updatedPart)
+                    //updating quantity to parts table
+                    const oldQuantity = parseInt(part.availableQuantity)
+                    const updatedQuantity = oldQuantity - quantity
+                    const updatedPart = { ...part, availableQuantity: updatedQuantity }
 
-                // const url = `https://mysterious-retreat-05451.herokuapp.com/inventory/${id}`
-                // fetch(url, {
-                //     method: 'put',
-                //     headers: {
-                //         'content-type': 'application/json'
-                //     },
-                //     body: JSON.stringify(updatedCar)
-                // })
-                //     .then(res => res.json())
-                //     .then(data => {
-                //         if (data.modifiedCount > 0) {
-                //             console.log('success', data)
-                //             setCar(updatedCar)
-                //             toast.info('Quantity is added.', {
-                //                 position: toast.POSITION.TOP_CENTER
-                //             })
-                //             event.target.reset()
-                //         }
-                //     })
+                    const url = `http://localhost:5000/parts/${id}`
+                    fetch(url, {
+                        method: 'put',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(updatedPart)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.modifiedCount > 0) {
+                                setParts(updatedPart)
+                            }
+                        })
+                }
 
             })
     }
