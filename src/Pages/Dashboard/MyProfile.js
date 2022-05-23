@@ -1,18 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
+import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
+import SetProfileModal from './SetProfileModal';
 
 const MyProfile = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [user] = useAuthState(auth)
+    const email = user?.email
+    const { data: userInfo, isLoading, refetch } = useQuery('user', () =>
+        fetch(`http://localhost:5000/user?email=${email}`, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json()));
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div>
-            <h2 className='text-3xl text-accent font-bold mt-3'>Profile setting</h2>
-            <div class="card w-96 bg-base-100 shadow-xl">
+            <h2 className='text-3xl text-accent font-bold mt-3'>My Profile</h2>
+            <div class="card lg:w-96 md:w-96 bg-base-100 shadow-xl">
                 <div class="card-body">
-                    <h2 class="card-title">Card title!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Buy Now</button>
-                    </div>
+                    <h2 class="text-xl text-center font-bold">{user.displayName}</h2>
+                    <p className='text-lg '>Email: {userInfo.email}</p>
+                    <label onClick={() => setIsModalOpen(true)} for="profileModal" class="btn modal-button btn-sm btn-primary">Edit Profile</label>
+                    {/* <button class="btn btn-sm btn-primary">Edit Profile</button> */}
+
                 </div>
             </div>
+            {
+                isModalOpen && <SetProfileModal
+                    setIsModalOpen={setIsModalOpen}
+                    name={user.displayName}
+                    email={userInfo.email}
+                    id={userInfo._id}
+                    userInfo={userInfo}
+                ></SetProfileModal>
+            }
         </div>
     );
 };
