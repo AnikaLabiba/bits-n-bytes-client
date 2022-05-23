@@ -1,8 +1,9 @@
-import React from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import React, { useEffect } from 'react';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import useToken from '../../../hooks/useToken';
 import Loading from '../../Shared/Loading';
 
 const Login = () => {
@@ -11,7 +12,7 @@ const Login = () => {
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
 
-    // const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const [
@@ -21,31 +22,25 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    if (user) {
-        navigate(from, { replace: true });
-    }
+    const [token] = useToken(user || gUser)
 
-    // const [token] = useToken(user || gUser)
-
-    // useEffect(() => {
-    //     if (token) {
-    //         navigate(from, { replace: true });
-    //     }
-    // }, [token, from, navigate])
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [token, from, navigate])
 
 
-    if (loading) {
+    if (loading || gLoading) {
         return <Loading></Loading>
     }
 
     let errorElememt;
-    if (error) {
-        errorElememt = <p className='text-red-500 text-sm'>{error?.message}</p>
+    if (error || gError) {
+        errorElememt = <p className='text-red-500 text-sm'>{error?.message}{gError?.message}</p>
     }
     const onSubmit = data => {
-        console.log(data);
         signInWithEmailAndPassword(data.email, data.password)
-
     }
     return (
         <div className='flex h-screen justify-center items-center'>
@@ -105,6 +100,11 @@ const Login = () => {
                         <input className='btn w-full max-w-xs' type="submit" value='Login' />
                     </form>
                     <p><small>New to Bit n Bytes? <Link className='text-blue-400' to="/register">Create New Account</Link></small></p>
+                    <div className="divider">OR</div>
+                    <button
+                        onClick={() => signInWithGoogle()}
+                        className="btn btn-outline"
+                    >Continue with Google</button>
                 </div>
             </div>
         </div>

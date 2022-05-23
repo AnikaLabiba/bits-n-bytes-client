@@ -18,7 +18,7 @@ const Header = () => {
     </>
     const logout = () => {
         signOut(auth);
-        // localStorage.removeItem('accessToken')
+        localStorage.removeItem('accessToken')
     };
     return (
         <div class="navbar bg-success lg:px-10">
@@ -42,11 +42,13 @@ const Header = () => {
                 {
                     user ? <>
                         <div class="dropdown dropdown-end">
-                            <label tabindex="0" class="btn btn-ghost">
-                                <p className='text-2xl text-center'><BiUserCircle /></p>
-                                <p>{user?.displayName}</p>
+                            {
+                                user && <label tabindex="0" class="btn btn-ghost">
+                                    <p className='text-2xl text-center'><BiUserCircle /></p>
+                                    <p>{user.displayName}</p>
 
-                            </label>
+                                </label>
+                            }
                             <ul tabindex="0" class="p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                                 <li><button onClick={logout} class="btn btn-xs btn-ghost pb-2">Logout<IoMdLogOut /></button></li>
                             </ul>

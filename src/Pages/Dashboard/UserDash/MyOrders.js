@@ -31,7 +31,7 @@ const MyOrders = () => {
 
                         {
                             orders?.map((order, index) =>
-                                <tr>
+                                <tr key={order._id}>
                                     <th>{index + 1}</th>
                                     <td>{order.name}</td>
                                     <td>{order.part}</td>
