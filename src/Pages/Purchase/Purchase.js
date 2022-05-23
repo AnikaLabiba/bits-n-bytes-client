@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useParts from '../../hooks/useParts';
+import Loading from '../Shared/Loading';
 
 const Purchase = () => {
     const [user] = useAuthState(auth)
@@ -19,12 +21,14 @@ const Purchase = () => {
             .then(data => setPart(data))
     }, [id])
 
-    // const { data: part, isLoading, refetch } = useQuery(['part', id], () => {
+    // const { data: part, isLoading, refetch } = useQuery('part', () => {
     //     fetch(`http://localhost:5000/part/${id}`)
     //         .then(res => res.json())
     // })
 
-
+    // if (isLoading) {
+    //     return <Loading />
+    // }
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -106,16 +110,16 @@ const Purchase = () => {
                         <div class="lg:flex p-10 justify-center items-center">
                             <div class="avatar flex-shrink-0">
                                 <div class="w-2/5 rounded-full mx-auto">
-                                    <img className='w-1/5' src={part.img} alt={part.name} />
+                                    <img className='w-1/5' src={part?.img} alt={part?.name} />
                                 </div>
                             </div>
                             <div className='lg:flex-shrink-1 w-full text-left'>
-                                <h2 class="card-title">{part.name}</h2>
-                                <p>{part.description}</p>
+                                <h2 class="card-title">{part?.name}</h2>
+                                <p>{part?.description}</p>
                                 <div className='lg:flex mt-2'>
-                                    <p class=" badge badge-primary text-base py-2">Min order: {part.minOrderQuantity}</p>
-                                    <p class="badge mx-2 badge-secondary text-base py-2">In stock {part.availableQuantity}</p>
-                                    <p class="badge mx-2 badge-accent text-base py-2">${part.price}</p>
+                                    <p class=" badge badge-primary text-base py-2">Min order: {part?.minOrderQuantity}</p>
+                                    <p class="badge mx-2 badge-secondary text-base py-2">In stock {part?.availableQuantity}</p>
+                                    <p class="badge mx-2 badge-accent text-base py-2">${part?.price}</p>
                                     <p class="badge badge-info mx-2 text-base py-2">Order quantity: {orderQuantity}</p>
                                 </div>
                             </div>
