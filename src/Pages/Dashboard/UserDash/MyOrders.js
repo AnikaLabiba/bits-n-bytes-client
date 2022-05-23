@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
 import auth from '../../../firebase.init';
+import Loading from '../../Shared/Loading';
 
 const MyOrders = () => {
     const [user] = useAuthState(auth)
-    const [orders, setOrders] = useState([])
-    useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setOrders(data))
-    }, [user?.email])
+    const email = user?.email
+    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`http://localhost:5000/orders?email=${email}`)
+        .then(res => res.json()));
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
     return (
         <div>
             <h2 className='text-3xl text-center font-bold'>My orders </h2>
@@ -28,7 +30,7 @@ const MyOrders = () => {
                     <tbody>
 
                         {
-                            orders.map((order, index) =>
+                            orders?.map((order, index) =>
                                 <tr>
                                     <th>{index + 1}</th>
                                     <td>{order.name}</td>
