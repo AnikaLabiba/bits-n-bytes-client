@@ -6,7 +6,12 @@ import Loading from '../../Shared/Loading';
 const MyOrders = () => {
     const [user] = useAuthState(auth)
     const email = user?.email
-    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`http://localhost:5000/orders?email=${email}`)
+    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`http://localhost:5000/orders?email=${email}`, {
+        method: 'GET',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
         .then(res => res.json()));
     if (isLoading) {
         return <Loading></Loading>
@@ -36,7 +41,10 @@ const MyOrders = () => {
                                     <td>{order.name}</td>
                                     <td>{order.part}</td>
                                     <td>${order.price}</td>
-                                    <td><button class="btn btn-xs">Tiny</button></td>
+                                    <td>
+                                        <button class="btn btn-xs bg-accent text-black">Pay</button>
+                                        <button class="btn btn-xs bg-secondary text-black ml-2">Cancel</button>
+                                    </td>
                                 </tr>)
                         }
 
