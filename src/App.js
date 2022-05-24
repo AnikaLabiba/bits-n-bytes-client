@@ -18,6 +18,7 @@ import MyOrders from './Pages/Dashboard/UserDash/MyOrders';
 import AddProduct from './Pages/Dashboard/AdminDash/AddProduct';
 import ManageProducts from './Pages/Dashboard/AdminDash/ManageProducts';
 import ManagesOrders from './Pages/Dashboard/AdminDash/ManagesOrders';
+import AllUsers from './Pages/Dashboard/AdminDash/AllUsers';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path='addProduct' element={<AddProduct />}></Route>
           <Route path='manageProducts' element={<ManageProducts />}></Route>
           <Route path='manageOrders' element={<ManagesOrders />}></Route>
+          <Route path='allUsers' element={<AllUsers />}></Route>
         </Route>
       </Routes>
       <Footer></Footer>
