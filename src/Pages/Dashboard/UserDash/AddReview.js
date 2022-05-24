@@ -7,13 +7,12 @@ import auth from '../../../firebase.init';
 const AddReview = () => {
     const [user] = useAuthState(auth)
     const [rating, setRating] = useState(0)
-    const firstExample = {
+    const ratingProperty = {
         size: 30,
         value: 0,
         edit: true,
         onChange: newValue => {
             setRating(newValue)
-            // console.log(`Example 2: new value is ${newValue}`);
         }
     };
 
@@ -25,7 +24,6 @@ const AddReview = () => {
             feedback: event.target.feedback.value,
             ratingNUm: rating
         }
-        console.log(review);
 
         if (rating) {
             fetch('http://localhost:5000/review', {
@@ -59,7 +57,7 @@ const AddReview = () => {
 
             <div className='flex items-center text-lg justify-center mr-5 '>
                 <h3>Give Rating</h3>
-                <ReactStars {...firstExample} />
+                <ReactStars {...ratingProperty} />
             </div>
 
             <form onSubmit={getFeedback}>
