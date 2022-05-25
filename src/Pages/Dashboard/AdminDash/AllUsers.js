@@ -21,7 +21,7 @@ const AllUsers = () => {
         <div>
             <h2 className='text-2xl font-bold'>{users.length} users found</h2>
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="table lg:table md:table table-auto">
 
                     <thead>
                         <tr>

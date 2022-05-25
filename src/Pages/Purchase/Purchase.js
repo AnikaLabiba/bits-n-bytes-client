@@ -117,7 +117,7 @@ const Purchase = () => {
                                 <h2 class="card-title">{part?.name}</h2>
                                 <p>{part?.description}</p>
                                 <div className='lg:flex mt-2'>
-                                    <p class=" badge badge-primary text-base py-2">Min order: {part?.minOrderQuantity}</p>
+                                    <p class=" badge badge-primary text-white p-4">Min order: {part?.minOrderQuantity}</p>
                                     <p class="badge mx-2 badge-secondary text-base py-2">In stock {part?.availableQuantity}</p>
                                     <p class="badge mx-2 badge-accent text-base py-2">${part?.price}</p>
                                     <p class="badge badge-info mx-2 text-base py-2">Order quantity: {orderQuantity}</p>

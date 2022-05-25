@@ -11,9 +11,9 @@ const AddProduct = () => {
             name: data.part,
             img: data.image,
             description: data.description,
-            minOrderQuantity: data.minOrder,
-            availableQuantity: data.availableQuantity,
-            price: data.price
+            minOrderQuantity: parseInt(data.minOrder),
+            availableQuantity: parseInt(data.availableQuantity),
+            price: parseFloat(data.price)
         }
         console.log(part);
         fetch('http://localhost:5000/part', {

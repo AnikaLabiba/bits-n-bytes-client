@@ -16,7 +16,7 @@ const ManageProducts = () => {
         <div>
             <h2 className='text-2xl text-center font-bold my-5'>Manage Products</h2>
             <div class="overflow-x-auto">
-                <table class="table table-auto">
+                <table class="lg:table md:table table-auto">
 
                     <thead>
                         <tr>
