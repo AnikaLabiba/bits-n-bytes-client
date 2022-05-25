@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import useParts from '../../../hooks/useParts';
 import Loading from '../../Shared/Loading';
 import DeletePartModal from './DeletePartModal';
 
