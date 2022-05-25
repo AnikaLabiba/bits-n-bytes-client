@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import useParts from '../../../hooks/useParts';
+import Loading from '../../Shared/Loading';
 import DeletePartModal from './DeletePartModal';
 
 const ManageProducts = () => {
+    const { data: parts, isLoading, refetch
+    } = useQuery('parts', () =>
+        fetch('http://localhost:5000/parts')
+            .then(res => res.json()))
     const [deletingPart, setDeletingPart] = useState(null)
-    const [parts] = useParts()
+    if (isLoading) {
+        return <Loading />
+    }
     return (
         <div>
             <h2>Manage Products</h2>
@@ -46,6 +54,7 @@ const ManageProducts = () => {
                 deletingPart && <DeletePartModal
                     deletingPart={deletingPart}
                     setDeletingPart={setDeletingPart}
+                    refetch={refetch}
                 ></DeletePartModal>
             }
         </div>

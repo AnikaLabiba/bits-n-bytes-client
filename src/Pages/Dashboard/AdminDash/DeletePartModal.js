@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-const DeletePartModal = ({ deletingPart, setDeletingPart }) => {
+const DeletePartModal = ({ deletingPart, setDeletingPart, refetch }) => {
     const { _id, name } = deletingPart
 
     const handleDelete = () => {
@@ -17,6 +17,7 @@ const DeletePartModal = ({ deletingPart, setDeletingPart }) => {
                     toast(`${name} is deleted`, {
                         position: toast.POSITION.TOP_CENTER
                     })
+                    refetch()
                     setDeletingPart(null)
                 }
             })
