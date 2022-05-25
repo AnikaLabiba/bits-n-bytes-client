@@ -22,12 +22,12 @@ const MyProfile = () => {
     }
     return (
         <div>
-            <h2 className='text-3xl text-accent font-bold mt-3'>My Profile</h2>
+            <h2 className='text-3xl text-accent font-bold mt-3 text-center'>My Profile</h2>
             <div class="card lg:w-96 md:w-96 bg-base-100 shadow-xl">
                 <div class="card-body">
                     <h2 class="text-xl text-center font-bold">{user.displayName}</h2>
                     <p className='text-lg '>Email: {userInfo.email}</p>
-                    <label onClick={() => setIsModalOpen(true)} for="profileModal" class="btn modal-button btn-sm btn-primary">Edit Profile</label>
+                    <label onClick={() => setIsModalOpen(true)} for="profileModal" class="btn modal-button btn-sm btn-accent">Edit Profile</label>
                     {/* <button class="btn btn-sm btn-primary">Edit Profile</button> */}
 
                 </div>

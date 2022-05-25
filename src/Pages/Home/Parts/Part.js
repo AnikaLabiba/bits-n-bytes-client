@@ -17,11 +17,11 @@ const Part = ({ part }) => {
             <div class="card-body mt-14">
                 <div className='lg:flex'>
                     <p class="badge badge-accent">${price}</p>
-                    <p class=" badge badge-primary mx-2">Min order: {minOrderQuantity}</p>
+                    <p class=" badge badge-info mx-2">Min order: {minOrderQuantity}</p>
                     <p class="badge badge-secondary">In stock {availableQuantity}</p>
                 </div>
                 <p>{description.slice(0, 50)}</p>
-                <button onClick={() => handleNavigate(_id)} class="btn btn-primary w-full">Order Now</button>
+                <button onClick={() => handleNavigate(_id)} class="btn btn-accent w-full">Order Now</button>
             </div>
 
         </div>

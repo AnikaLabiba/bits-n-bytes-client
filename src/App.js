@@ -19,10 +19,11 @@ import AddProduct from './Pages/Dashboard/AdminDash/AddProduct';
 import ManageProducts from './Pages/Dashboard/AdminDash/ManageProducts';
 import ManagesOrders from './Pages/Dashboard/AdminDash/ManagesOrders';
 import AllUsers from './Pages/Dashboard/AdminDash/AllUsers';
+import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex flex-col h-screen justify-between">
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home />}></Route>
@@ -44,6 +45,7 @@ function App() {
           <Route path='manageOrders' element={<ManagesOrders />}></Route>
           <Route path='allUsers' element={<AllUsers />}></Route>
         </Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
       <ToastContainer />

@@ -62,7 +62,7 @@ const AddReview = () => {
 
             <form onSubmit={getFeedback}>
                 <input type="text" name='feedback' placeholder="Feedback" class="input input-bordered input-lg w-full max-w-xs" />
-                <input className='btn btn-xs mt-4' type="submit" value="Add Review" />
+                <input className='btn btn-xs btn-primary w-full mx-auto mt-4' type="submit" value="Add Review" />
             </form>
 
         </div>

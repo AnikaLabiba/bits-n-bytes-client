@@ -21,7 +21,8 @@ const MyOrders = () => {
         <div>
             <h2 className='text-3xl text-center font-bold'>My orders </h2>
             <div class="overflow-x-auto">
-                <table class="table table-zebra w-full">
+
+                <table class="table table-auto table-zebra">
 
                     <thead>
                         <tr>

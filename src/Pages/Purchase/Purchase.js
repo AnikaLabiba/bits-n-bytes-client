@@ -101,7 +101,7 @@ const Purchase = () => {
     return (
         <div className='my-10'>
             <h2 className='text-3xl text-center font-bold'>Hello <span className='text-primary'>{user?.displayName}!</span></h2>
-            <h3 className='text-xl font-bold'>Thanks for your buisness</h3>
+            <h3 className='text-xl font-bold text-center'>Thanks for your buisness</h3>
 
             <div class="hero lg:min-h-screen bg-base-200">
                 <div class="hero-content flex-col lg:flex-row-reverse">
