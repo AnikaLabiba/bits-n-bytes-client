@@ -27,11 +27,15 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(inserted => {
                 if (inserted.insertedId) {
-                    toast.success('Part added successfully')
+                    toast.success('Part added successfully', {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                     reset()
                 }
                 else {
-                    toast.error('Failed to add the part')
+                    toast.error('Failed to add the part', {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                 }
             })
     }

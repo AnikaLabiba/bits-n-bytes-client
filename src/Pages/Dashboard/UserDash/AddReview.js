@@ -37,15 +37,21 @@ const AddReview = () => {
                 .then(res => res.json())
                 .then(inserted => {
                     if (inserted.insertedId) {
-                        toast.success('Review added successfully')
+                        toast.success('Review added successfully', {
+                            position: toast.POSITION.TOP_CENTER
+                        })
                     }
                     else {
-                        toast.error('Failed to add the review')
+                        toast.error('Failed to add the review', {
+                            position: toast.POSITION.TOP_CENTER
+                        })
                     }
                 })
         }
         else {
-            toast.warn('Please put the raing value')
+            toast.warn('Please put the raing value', {
+                position: toast.POSITION.TOP_CENTER
+            })
         }
     }
 

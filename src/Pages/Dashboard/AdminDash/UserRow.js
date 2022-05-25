@@ -13,14 +13,18 @@ const UserRow = ({ user, index, refetch }) => {
         })
             .then(res => {
                 if (res.status === 403) {
-                    toast.error('Failed to make admin')
+                    toast.error('Failed to make admin', {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                 }
                 return res.json()
             })
             .then(data => {
                 if (data.modifiedCount > 0) {
                     refetch()
-                    toast.success('Admin added Sucessfully')
+                    toast.success('Admin added Sucessfully', {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                 }
 
             })
