@@ -22,49 +22,49 @@ const Header = () => {
         localStorage.removeItem('accessToken')
     };
     return (
-        <div class="navbar bg-accent text-primary font-bold lg:px-10">
-            <div class="navbar-start">
-                <div class="dropdown">
-                    <label tabindex="0" class="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        <div className="navbar bg-accent text-primary font-bold lg:px-10">
+            <div className="navbar-start">
+                <div className="dropdown">
+                    <label tabIndex="0" className="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='/' class="btn btn-ghost normal-case text-xl">Bits n Bytes</Link>
+                <Link to='/' className="btn btn-ghost normal-case text-xl">Bits n Bytes</Link>
             </div>
-            <div class="navbar-center hidden lg:flex">
-                <ul class="menu menu-horizontal p-0">
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal p-0">
                     {menuItems}
                 </ul>
             </div>
-            <div class="navbar-end">
+            <div className="navbar-end">
                 {
                     user ? <>
-                        <div class="dropdown dropdown-end">
+                        <div className="dropdown dropdown-end">
                             {
-                                user && <label tabindex="0" class="btn btn-ghost">
+                                user && <label tabIndex="0" className="btn btn-ghost">
                                     <p className='text-2xl text-center'><BiUserCircle /></p>
                                     <p>{user.displayName}</p>
 
                                 </label>
                             }
-                            <ul tabindex="0" class="p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                                <li><button onClick={logout} class="btn btn-xs btn-ghost pb-2">Logout<IoMdLogOut /></button></li>
+                            <ul tabIndex="0" className="p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                                <li><button onClick={logout} className="btn btn-xs btn-ghost pb-2">Logout<IoMdLogOut /></button></li>
                             </ul>
                         </div>
                     </>
-                        : <ul class="menu menu-horizontal p-0">
+                        : <ul className="menu menu-horizontal p-0">
                             <li><Link to='/login'>Login</Link></li>
                         </ul>
 
                 }
-                {/* <ul class="menu menu-horizontal p-0">
+                {/* <ul className="menu menu-horizontal p-0">
                     {
                         user && <>
-                            <li><p class="btn btn-ghost"><span className='text-xl'><BiUserCircle /></span>{user?.displayName}</p></li>
-                            <li><button class="btn btn-ghost">Logout</button></li>
+                            <li><p className="btn btn-ghost"><span className='text-xl'><BiUserCircle /></span>{user?.displayName}</p></li>
+                            <li><button className="btn btn-ghost">Logout</button></li>
                         </>
                     }
                 </ul> */}

@@ -4,7 +4,7 @@ const useParts = () => {
     const [parts, setParts] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/parts')
+        fetch('https://safe-escarpment-45724.herokuapp.com/parts')
             .then(res => res.json())
             .then(data => setParts(data.reverse()))
     }, [])

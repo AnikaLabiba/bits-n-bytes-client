@@ -44,9 +44,9 @@ const Login = () => {
     }
     return (
         <div className='flex h-screen justify-center items-center'>
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="text-center font-bold text-xl">Login here</h2>
+            <div className="card bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="text-center font-bold text-xl">Login here</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">

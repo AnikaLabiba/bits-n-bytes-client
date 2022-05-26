@@ -6,7 +6,7 @@ import DeletePartModal from './DeletePartModal';
 const ManageProducts = () => {
     const { data: parts, isLoading, refetch
     } = useQuery('parts', () =>
-        fetch('http://localhost:5000/parts')
+        fetch('https://safe-escarpment-45724.herokuapp.com/parts')
             .then(res => res.json()))
     const [deletingPart, setDeletingPart] = useState(null)
     if (isLoading) {
@@ -15,8 +15,8 @@ const ManageProducts = () => {
     return (
         <div>
             <h2 className='text-2xl text-center font-bold my-5'>Manage Products</h2>
-            <div class="overflow-x-auto">
-                <table class="lg:table md:table table-auto">
+            <div className="overflow-x-auto">
+                <table className="lg:table md:table table-auto">
 
                     <thead>
                         <tr>
@@ -39,7 +39,7 @@ const ManageProducts = () => {
                                     </td>
                                     <td>${part.price}</td>
                                     <td>
-                                        <label onClick={() => setDeletingPart(part)} for="delete-confirmation-modal" class="text-accent font-bold hover:text-blue-400">Delete</label>
+                                        <label onClick={() => setDeletingPart(part)} htmlFor="delete-confirmation-modal" className="text-accent font-bold hover:text-blue-400">Delete</label>
 
                                     </td>
                                 </tr>

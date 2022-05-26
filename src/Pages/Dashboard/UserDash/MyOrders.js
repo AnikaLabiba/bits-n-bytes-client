@@ -12,7 +12,7 @@ const MyOrders = () => {
     const [user] = useAuthState(auth);
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/order?email=${user.email}`, {
+            fetch(`https://safe-escarpment-45724.herokuapp.com/order?email=${user.email}`, {
                 method: 'get',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -34,9 +34,9 @@ const MyOrders = () => {
     return (
         <div>
             <h2 className='text-3xl text-center font-bold'>My orders </h2>
-            <div class="overflow-x-auto">
+            <div className="overflow-x-auto">
 
-                <table class="table lg:table md:table table-auto table-zebra">
+                <table className="table lg:table md:table table-auto table-zebra">
 
                     <thead>
                         <tr>
@@ -57,14 +57,14 @@ const MyOrders = () => {
                                     <td>{order.part}</td>
                                     <td>${order.price}</td>
                                     <td>
-                                        {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}> <button class="btn btn-xs bg-accent text-black">Pay</button></Link>}
+                                        {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}> <button className="btn btn-xs bg-accent text-black">Pay</button></Link>}
                                         {(order.price && order.paid) && <div>
-                                            <p class="text-blue-500 font-bold">Paid</p>
-                                            <p class="text-blue-400">Transaction Id: {order.transactionId
+                                            <p className="text-blue-500 font-bold">Paid</p>
+                                            <p className="text-blue-400">Transaction Id: {order.transactionId
                                             }</p>
                                         </div>}
                                         {
-                                            !order.paid && <label onClick={() => setCancelOrder(order)} for="delete-confirmation-modal" class="btn btn-xs bg-secondary text-black ml-2 hover:text-blue-400">Cancel</label>
+                                            !order.paid && <label onClick={() => setCancelOrder(order)} htmlFor="delete-confirmation-modal" className="btn btn-xs bg-secondary text-black ml-2 hover:text-blue-400">Cancel</label>
                                         }
 
                                     </td>

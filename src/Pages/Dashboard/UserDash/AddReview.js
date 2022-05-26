@@ -26,7 +26,7 @@ const AddReview = () => {
         }
 
         if (rating) {
-            fetch('http://localhost:5000/review', {
+            fetch('https://safe-escarpment-45724.herokuapp.com/review', {
                 method: 'post',
                 headers: {
                     'content-type': 'application/json',
@@ -67,7 +67,7 @@ const AddReview = () => {
             </div>
 
             <form onSubmit={getFeedback}>
-                <input type="text" name='feedback' placeholder="Feedback" class="input input-bordered input-lg w-full mx-auto " />
+                <input type="text" name='feedback' placeholder="Feedback" className="input input-bordered input-lg w-full mx-auto " />
                 <input className='btn btn-md btn-primary w-full mx-auto mt-4' type="submit" value="Add Review" />
             </form>
 

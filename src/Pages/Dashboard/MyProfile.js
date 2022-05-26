@@ -10,7 +10,7 @@ const MyProfile = () => {
     const [user] = useAuthState(auth)
     const email = user?.email
     const { data: userInfo, isLoading, refetch } = useQuery('user', () =>
-        fetch(`http://localhost:5000/user?email=${email}`, {
+        fetch(`https://safe-escarpment-45724.herokuapp.com/user?email=${email}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -23,11 +23,11 @@ const MyProfile = () => {
     return (
         <div>
             <h2 className='text-3xl text-accent font-bold mt-3 text-center'>My Profile</h2>
-            <div class="card lg:w-96 md:w-96 bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="text-xl text-center font-bold">{user.displayName}</h2>
+            <div className="card lg:w-96 md:w-96 bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="text-xl text-center font-bold">{user.displayName}</h2>
                     <p className='text-lg text-center'>Email: {userInfo.email}</p>
-                    <label onClick={() => setIsModalOpen(true)} for="profileModal" class="btn modal-button btn-sm btn-accent">Edit Profile</label>
+                    <label onClick={() => setIsModalOpen(true)} htmlFor="profileModal" className="btn modal-button btn-sm btn-accent">Edit Profile</label>
                 </div>
             </div>
             {

@@ -9,15 +9,15 @@ const Dashboard = () => {
     const [admin] = useAdmin(user)
     return (
         <div className='flex flex-col lg:h-screen justify-between'>
-            <div class="drawer drawer-mobile font-bold">
-                <input id="dashboard-sidebar" type="checkbox" class="drawer-toggle" />
-                <div class="drawer-content flex flex-col items-center">
+            <div className="drawer drawer-mobile font-bold">
+                <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
+                <div className="drawer-content flex flex-col items-center">
                     {/* <!-- Page content here --> */}
                     <Outlet />
                 </div>
-                <div class="drawer-side">
-                    <label for="dashboard-sidebar" class="drawer-overlay"></label>
-                    <ul class="menu p-4 overflow-y-auto w-80 bg-blue-100 text-primary">
+                <div className="drawer-side">
+                    <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
+                    <ul className="menu p-4 overflow-y-auto w-80 bg-blue-100 text-primary">
                         {/* <!-- Sidebar content here --> */}
                         <li><Link to='/dashboard'>My Profile</Link></li>
                         {

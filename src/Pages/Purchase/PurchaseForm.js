@@ -46,7 +46,7 @@ const PurchaseForm = ({ OrderQuantity, part, Order }) => {
                 address: address
 
             }
-            fetch('http://localhost:5000/order', {
+            fetch('https://safe-escarpment-45724.herokuapp.com/order', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

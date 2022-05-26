@@ -5,7 +5,7 @@ const OrderRow = ({ order, index, refetch, setCancelOrder }) => {
 
     const handleUpdateStatus = () => {
         const updatedOrder = { ...order, shipped: true }
-        fetch(`http://localhost:5000/order/${_id}`, {
+        fetch(`https://safe-escarpment-45724.herokuapp.com/order/${_id}`, {
             method: 'put',
             headers: {
                 'content-type': 'application/json',
@@ -39,7 +39,7 @@ const OrderRow = ({ order, index, refetch, setCancelOrder }) => {
                 {
                     !paid && <>
                         <span className='text-secondary'>Unpaid</span>
-                        <label onClick={() => setCancelOrder(order)} for="delete-confirmation-modal" className="btn btn-xs btn-secondary ml-1">Remove</label>
+                        <label onClick={() => setCancelOrder(order)} htmlFor="delete-confirmation-modal" className="btn btn-xs btn-secondary ml-1">Remove</label>
                     </>
                 }
             </td>

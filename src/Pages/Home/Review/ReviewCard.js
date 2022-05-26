@@ -15,11 +15,11 @@ const ReviewCard = ({ review }) => {
 
 
     return (
-        <div class="card bg-base-100 shadow-xl">
-            <div class="p-5 flex items-center justify-center">
-                <div class="avatar placeholder mr-4">
-                    <div class="bg-accent text-white rounded-full w-16">
-                        <span class="text-xl">{user}</span>
+        <div className="card bg-base-100 shadow-xl">
+            <div className="p-5 flex items-center justify-center">
+                <div className="avatar placeholder mr-4">
+                    <div className="bg-accent text-white rounded-full w-16">
+                        <span className="text-xl">{user}</span>
                     </div>
                 </div>
                 <div>

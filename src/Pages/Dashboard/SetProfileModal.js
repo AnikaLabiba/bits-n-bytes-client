@@ -15,7 +15,7 @@ const SetProfileModal = ({ name, email, setIsModalOpen, userInfo }) => {
             linkedIn: data.linkedIn,
         }
         //update user profile
-        fetch(`http://localhost:5000/user/${email}`, {
+        fetch(`https://safe-escarpment-45724.herokuapp.com/user/${email}`, {
             method: 'put',
             headers: {
                 'content-type': 'application/json',
@@ -35,11 +35,11 @@ const SetProfileModal = ({ name, email, setIsModalOpen, userInfo }) => {
     }
     return (
         <div>
-            <input type="checkbox" id="profileModal" class="modal-toggle" />
-            <div class="modal modal-bottom sm:modal-middle">
-                <div class="modal-box">
-                    <label for="profileModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 class="font-bold text-lg">Profile setting</h3>
+            <input type="checkbox" id="profileModal" className="modal-toggle" />
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <label htmlFor="profileModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <h3 className="font-bold text-lg">Profile setting</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className='lg:w-80 mx-auto'>
 
                         <div className="form-control w-full max-w-xs">

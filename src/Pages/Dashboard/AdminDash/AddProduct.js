@@ -16,7 +16,7 @@ const AddProduct = () => {
             price: parseFloat(data.price)
         }
         console.log(part);
-        fetch('http://localhost:5000/part', {
+        fetch('https://safe-escarpment-45724.herokuapp.com/part', {
             method: 'post',
             headers: {
                 'content-type': 'application/json',
