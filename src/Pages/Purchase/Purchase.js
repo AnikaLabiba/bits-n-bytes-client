@@ -29,10 +29,11 @@ const Purchase = () => {
     }
 
     return (
+
         <div class="hero lg:h-screen my-10">
             <div class="flex flex-col lg:flex-row-reverse ">
                 <div class="card w-full ml-6">
-                    <h2 className='text-3xl text-center font-bold'>Please confirm your order.</h2>
+                    <h2 className='text-2xl text-center font-bold'>Please confirm your order.</h2>
 
                     <div className='lg:flex-shrink-1 w-full text-center'>
                         <h2 class="text-primary text-xl">{part?.name}</h2>
@@ -61,47 +62,6 @@ const Purchase = () => {
                 </div>
             </div>
         </div>
-
-        // <div className="container">
-        //     <h2 className='text-3xl text-center font-bold'>Hello <span className='text-primary'>{user?.displayName}!</span></h2>
-        //     <h3 className='text-xl font-bold text-center'>Thanks for your buisness</h3>
-        //     <div className="mt-8">
-
-        //         <div className="card bg-base-100 shadow-xl">
-        //             <div>
-
-        //                 <div class="lg:flex p-10 justify-center items-center">
-        //                     <div class="avatar flex-shrink-0">
-        //                         <div class="w-2/5 rounded-full mx-auto">
-        //                             <img className='w-1/5' src={part?.img} alt={part?.name} />
-        //                         </div>
-        //                     </div>
-        //                     <div className='lg:flex-shrink-1 w-full text-left'>
-        //                         <h2 class="card-title">{part?.name}</h2>
-        //                         <p>{part?.description}</p>
-        //                         <div className='lg:flex mt-2'>
-        //                             <p class=" badge badge-primary text-white p-4">Min order: {part?.minOrderQuantity}</p>
-        //                             <p class="badge mx-2 badge-secondary text-base py-2">In stock {part?.availableQuantity}</p>
-        //                             <p class="badge mx-2 badge-accent text-base py-2">${part?.price}</p>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-
-        //                 <div className="ml-20">
-        //                     <h4>Order Quantity</h4>
-        //                     <button className='btn btn-primary mr-4' onClick={orderDecrement}>-</button>
-        //                     <input type="number" aria-controls='false'
-        //                         value={Order ? OrderQuantity : part?.min_quantity}
-        //                         name="OrderQuantity" className='input input-bordered input-accent text-accent w-20 text-center' />
-        //                     <button className='btn btn-primary ml-4' onClick={orderIncrement}>+</button>
-        //                 </div>
-        //             </div>
-        //             <PurchaseForm OrderQuantity={OrderQuantity} part={part} Order={Order}></PurchaseForm>
-        //         </div>
-
-        //     </div>
-        // </div>
-
 
     );
 };

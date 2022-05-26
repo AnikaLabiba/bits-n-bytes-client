@@ -5,8 +5,6 @@ import { toast } from "react-toastify";
 
 
 const PurchaseForm = ({ OrderQuantity, part, Order }) => {
-
-
     const minimumOrder = part?.minOrderQuantity
     const AvailableQuantity = part?.availableQuantity
     const [user, loading, error] = useAuthState(auth)
@@ -17,11 +15,9 @@ const PurchaseForm = ({ OrderQuantity, part, Order }) => {
     const user_email = user?.email;
 
 
-
-
     const handleSubmit = (event) => {
         event.preventDefault();
-        const name = user_name;
+        const name = user?.displayName;
         const email = user_email;
         const orderQuantity = event.target.orderQuantity.value;
         const phone = event.target.number.value;
@@ -34,25 +30,22 @@ const PurchaseForm = ({ OrderQuantity, part, Order }) => {
             setDisable(true)
             toast.error(`You Have To Purchase Minimum ${part?.minOrderQuantity} Pieces!`)
         }
-        else if (orderQuantity > part.available_quantity) {
+        else if (orderQuantity > part.availableQuantity) {
             setError("You Can Not Purchase More Than Available Products Quantity")
             setDisable(true)
-            toast.error(`You Can Not Order More Than ${part.available_quantity} Pieces!`)
+            toast.error(`You Can Not Order More Than ${part.availableQuantity} Pieces!`)
         }
         else {
             const order = {
-                productName: part.name,
-                userName: name,
-                userEmail: email,
-                orderQuantity: orderQuantity,
+                name: name,
+                email: email,
+                part: part.name,
+                price: part.price,
+                quantity: orderQuantity,
                 phone: phone,
                 address: address
 
             }
-
-
-
-
             fetch('http://localhost:5000/order', {
                 method: 'POST',
                 headers: {
@@ -70,7 +63,7 @@ const PurchaseForm = ({ OrderQuantity, part, Order }) => {
 
     return (
         <>
-            <h2 className="text-center font-bold text-4xl">Order Details</h2>
+            <h2 className="text-center font-bold text-2xl">Order Details</h2>
             <div className="">
                 <form onSubmit={handleSubmit}>
                     <div className="form-control place-order-form">
@@ -108,7 +101,7 @@ const PurchaseForm = ({ OrderQuantity, part, Order }) => {
                             className="input input-bordered "
                             placeholder="Your Quantity"
                             name="orderQuantity"
-                            value={Order ? OrderQuantity : part?.min_quantity}
+                            value={Order ? OrderQuantity : part?.minOrderQuantity}
                             required
                         />
                         <p className='text-red-500'>{Error || error}</p>
@@ -136,7 +129,6 @@ const PurchaseForm = ({ OrderQuantity, part, Order }) => {
 
                     <div className="form-control  mt-4">
                         <input disabled={OrderQuantity < minimumOrder || AvailableQuantity < OrderQuantity ? Disable : false} type="submit" value="purchase" className='btn btn-primary' />
-                        {/* <button className="btn ">Place Order</button> */}
                     </div>
                 </form>
             </div>

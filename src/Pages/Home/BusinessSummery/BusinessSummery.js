@@ -7,8 +7,8 @@ import { FaFileInvoiceDollar } from 'react-icons/fa';
 const BusinessSummery = () => {
     return (
         <div>
-            <h3 className='text-center font-bold'>Who Are We</h3>
-            <h2 className='text-center text-4xl font-bold'>An Ultimate Brand In Market For 10 Years</h2>
+            <h3 className='text-center  font-bold'>Who Are We</h3>
+            <h2 className='text-center text-primary text-4xl font-bold'>An Ultimate Brand In Market For 10 Years</h2>
             <div class="lg:flex md:flex">
 
                 <div className='stats shadow lg:w-full my-20 mx-8 stats-vertical lg:stats-horizontal md:stats-horizontal'>
