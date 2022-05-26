@@ -2,51 +2,35 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-const SetProfileModal = ({ id, name, email, setIsModalOpen, userInfo }) => {
-    const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const imgStorageKey = 'dbfa04656cc9dcc21680095a76a3195c'
+const SetProfileModal = ({ name, email, setIsModalOpen, userInfo }) => {
+    const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = async data => {
-        const img = data.image[0]
-        const formData = new FormData();
-        formData.append('image', img);
-        const url = `https://api.imgbb.com/1/upload?key=${imgStorageKey}`
-        fetch(url, {
-            method: 'post',
-            body: formData
+        const user = {
+            name: name,
+            email: email,
+            phone: data.phone,
+            education: data.education,
+            address: data.address,
+            linkedIn: data.linkedIn,
+        }
+        //update user profile
+        fetch(`http://localhost:5000/user/${email}`, {
+            method: 'put',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(user)
         })
             .then(res => res.json())
-            .then(result => {
-                if (result.success) {
-                    const img = result.data.url
-                    const user = {
-                        ...userInfo,
-                        name: name,
-                        email: email,
-                        phone: data.phone,
-                        img: img,
-                        address: data.address,
-                        linkedIn: data.linkedIn,
-                    }
-                    //update user profile
-                    fetch(`http://localhost:5000/user/${email}`, {
-                        method: 'put',
-                        headers: {
-                            'content-type': 'application/json',
-                            // authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                        },
-                        body: JSON.stringify(user)
+            .then(updated => {
+                if (updated.result.modifiedCount) {
+                    toast('Profile updated', {
+                        position: toast.POSITION.TOP_CENTER
                     })
-                        .then(res => res.json())
-                        .then(updated => {
-                            console.log(updated);
-                        })
-
                 }
             })
-
-        // }
-        // console.log(user);
         setIsModalOpen(false)
     }
     return (
@@ -60,21 +44,14 @@ const SetProfileModal = ({ id, name, email, setIsModalOpen, userInfo }) => {
 
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">Photo</span>
+                                <span className="label-text">Education</span>
                             </label>
                             <input
-                                type="file"
+                                type="text"
+                                placeholder='Education'
                                 className="input input-bordered w-full max-w-xs"
-                                {...register("image", {
-                                    required: {
-                                        value: true,
-                                        message: 'Image is Required'
-                                    }
-                                })}
+                                {...register("education")}
                             />
-                            <label className="label">
-                                {errors.image?.type === 'required' && <span className="label-text-alt text-red-500">{errors.image.message}</span>}
-                            </label>
                         </div>
 
                         <div className="form-control w-full max-w-xs">

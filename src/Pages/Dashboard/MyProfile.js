@@ -28,8 +28,6 @@ const MyProfile = () => {
                     <h2 class="text-xl text-center font-bold">{user.displayName}</h2>
                     <p className='text-lg text-center'>Email: {userInfo.email}</p>
                     <label onClick={() => setIsModalOpen(true)} for="profileModal" class="btn modal-button btn-sm btn-accent">Edit Profile</label>
-                    {/* <button class="btn btn-sm btn-primary">Edit Profile</button> */}
-
                 </div>
             </div>
             {
