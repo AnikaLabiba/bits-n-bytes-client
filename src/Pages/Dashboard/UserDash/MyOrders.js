@@ -19,7 +19,6 @@ const MyOrders = () => {
 
             })
                 .then(res => {
-                    console.log('res', res);
                     if (res.status === 401 || res.status === 403) {
                         signOut(auth);
                         localStorage.removeItem('accessToken')
@@ -57,9 +56,15 @@ const MyOrders = () => {
                                     <td>{order.part}</td>
                                     <td>${order.price}</td>
                                     <td>
-                                        {(order.price && !order.paid) && <Link to={``}> <button class="btn btn-xs bg-accent text-black">Pay</button></Link>}
-                                        {(order.price && order.paid) && <span class="text-accent">Paid</span>}
-                                        <button class="btn btn-xs bg-secondary text-black ml-2">Cancel</button>
+                                        {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}> <button class="btn btn-xs bg-accent text-black">Pay</button></Link>}
+                                        {(order.price && order.paid) && <div>
+                                            <p class="text-blue-500 font-bold">Paid</p>
+                                            <p class="text-blue-400">Transaction Id: {order.transactionId
+                                            }</p>
+                                        </div>}
+                                        {
+                                            !order.paid && <button class="btn btn-xs bg-secondary text-black ml-2">Cancel</button>
+                                        }
                                     </td>
                                 </tr>)
                         }
