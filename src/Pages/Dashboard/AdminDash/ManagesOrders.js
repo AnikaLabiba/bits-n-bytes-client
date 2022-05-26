@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../Shared/Loading';
-import OrderRow from '../UserDash/OrderRow';
+import CancelOrderModal from '../UserDash/CancelOrderModal';
+import OrderRow from './OrderRow';
 
 const ManagesOrders = () => {
+    const [cancelOrder, setCancelOrder] = useState(null)
     const { data: orders, isLoading, refetch } = useQuery('orders', () =>
         fetch('http://localhost:5000/orders', {
             method: 'GET',
@@ -35,12 +37,20 @@ const ManagesOrders = () => {
                             key={order._id}
                             index={index}
                             order={order}
+                            setCancelOrder={setCancelOrder}
                             refetch={refetch}
                         ></OrderRow>)}
 
                     </tbody>
                 </table>
             </div>
+            {
+                cancelOrder && <CancelOrderModal
+                    cancelOrder={cancelOrder}
+                    setCancelOrder={setCancelOrder}
+                    refetch={refetch}
+                ></CancelOrderModal>
+            }
         </div>
     );
 };

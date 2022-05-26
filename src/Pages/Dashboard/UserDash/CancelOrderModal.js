@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-const CancelOrderModal = ({ cancelOrder, setCancelOrder }) => {
+const CancelOrderModal = ({ cancelOrder, setCancelOrder, refetch }) => {
     const { part, _id } = cancelOrder
 
     const handleCancelOrder = () => {
@@ -17,8 +17,9 @@ const CancelOrderModal = ({ cancelOrder, setCancelOrder }) => {
                     toast(`${part} is deleted`, {
                         position: toast.POSITION.TOP_CENTER
                     })
-                    // refetch()
                     setCancelOrder(null)
+                    refetch()
+
                 }
             })
     }
