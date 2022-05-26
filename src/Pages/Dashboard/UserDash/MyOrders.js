@@ -1,10 +1,8 @@
 import { signOut } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init'
-import Loading from '../../Shared/Loading';
 import CancelOrderModal from './CancelOrderModal';
 
 const MyOrders = () => {
@@ -31,17 +29,7 @@ const MyOrders = () => {
                 })
                 .then(data => setOrders(data));
         }
-    }, [user])
-
-
-    // const { data: parts, isLoading, refetch
-    // } = useQuery('parts', () =>
-    //     fetch('http://localhost:5000/parts')
-    //         .then(res => res.json()))
-
-    // if (isLoading) {
-    //     return <Loading />
-    // }
+    }, [user, navigate])
 
     return (
         <div>

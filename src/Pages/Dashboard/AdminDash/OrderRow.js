@@ -1,7 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const OrderRow = ({ order, index, refetch, setCancelOrder }) => {
-    const { name, part, price, paid } = order
+    const { name, part, price, paid, _id, shipped } = order
+
+    const handleUpdateStatus = () => {
+        const updatedOrder = { ...order, shipped: true }
+        fetch(`http://localhost:5000/order/${_id}`, {
+            method: 'put',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(updatedOrder)
+        }).then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    refetch()
+                    console.log(data);
+                }
+            })
+    }
 
     return (
         <tr>
@@ -10,12 +28,14 @@ const OrderRow = ({ order, index, refetch, setCancelOrder }) => {
             <td>{part}</td>
             <td>${price}</td>
             <td>
-                {paid &&
-                    <select class="select select-bordered select-sm w-full bg-primary max-w-xs">
-                        <option disabled selected>Pending</option>
-                        <option><button className='btn btn-xs'>Shipped</button></option>
-                    </select>
-                }
+                {(paid && !shipped) && <>
+                    <span className='text-secondary'>Pending</span>
+                    <button onClick={handleUpdateStatus} className="btn btn-xs btn-secondary ml-1">Shipped</button>
+                </>}
+                {(paid && shipped) && <>
+                    <span className='text-primary'>Shipped</span>
+                </>}
+
                 {
                     !paid && <>
                         <span className='text-secondary'>Unpaid</span>

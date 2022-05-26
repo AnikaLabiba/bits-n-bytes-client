@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { BiUserCircle } from 'react-icons/bi';
 import { IoMdLogOut } from 'react-icons/io';
@@ -8,7 +8,7 @@ import { signOut } from 'firebase/auth';
 
 const Header = () => {
     const [user] = useAuthState(auth)
-
+    const navigate = useNavigate()
     const menuItems = <>
         <li><Link to='/home'>Home</Link></li>
         {user && <li><Link to='/dashboard'>Dashboard</Link></li>}
@@ -18,6 +18,7 @@ const Header = () => {
     </>
     const logout = () => {
         signOut(auth);
+        navigate('/login')
         localStorage.removeItem('accessToken')
     };
     return (
