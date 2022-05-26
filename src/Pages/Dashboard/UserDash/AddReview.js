@@ -57,7 +57,7 @@ const AddReview = () => {
 
     return (
         <div>
-            <h2 className='text-3xl mb-8'>Add your Feedback</h2>
+            <h2 className='text-3xl mb-8 text-center'>Add your Feedback</h2>
 
 
 
@@ -67,8 +67,8 @@ const AddReview = () => {
             </div>
 
             <form onSubmit={getFeedback}>
-                <input type="text" name='feedback' placeholder="Feedback" class="input input-bordered input-lg w-full max-w-xs" />
-                <input className='btn btn-xs btn-primary w-full mx-auto mt-4' type="submit" value="Add Review" />
+                <input type="text" name='feedback' placeholder="Feedback" class="input input-bordered input-lg w-full mx-auto " />
+                <input className='btn btn-md btn-primary w-full mx-auto mt-4' type="submit" value="Add Review" />
             </form>
 
         </div>

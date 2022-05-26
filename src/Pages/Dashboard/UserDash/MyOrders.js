@@ -4,10 +4,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init'
+import Loading from '../../Shared/Loading';
+import CancelOrderModal from './CancelOrderModal';
 
 const MyOrders = () => {
     const navigate = useNavigate()
     const [orders, setOrders] = useState([]);
+    const [cancelOrder, setCancelOrder] = useState(null)
     const [user] = useAuthState(auth);
     useEffect(() => {
         if (user) {
@@ -29,6 +32,16 @@ const MyOrders = () => {
                 .then(data => setOrders(data));
         }
     }, [user])
+
+
+    // const { data: parts, isLoading, refetch
+    // } = useQuery('parts', () =>
+    //     fetch('http://localhost:5000/parts')
+    //         .then(res => res.json()))
+
+    // if (isLoading) {
+    //     return <Loading />
+    // }
 
     return (
         <div>
@@ -63,8 +76,9 @@ const MyOrders = () => {
                                             }</p>
                                         </div>}
                                         {
-                                            !order.paid && <button class="btn btn-xs bg-secondary text-black ml-2">Cancel</button>
+                                            !order.paid && <label onClick={() => setCancelOrder(order)} for="delete-confirmation-modal" class="btn btn-xs bg-secondary text-black ml-2 hover:text-blue-400">Cancel</label>
                                         }
+
                                     </td>
                                 </tr>)
                         }
@@ -72,6 +86,12 @@ const MyOrders = () => {
                     </tbody>
                 </table>
             </div>
+            {
+                cancelOrder && <CancelOrderModal
+                    cancelOrder={cancelOrder}
+                    setCancelOrder={setCancelOrder}
+                ></CancelOrderModal>
+            }
         </div>
     );
 };
